@@ -1,0 +1,26 @@
+Avioane means airplane in Romanian and is a very popular game in the country.
+
+The games is very similar to Battleships, but involves airplanes.
+
+The user can set 5 airplanes on his board.
+
+After setting his airplanes, he takes turns with his opponent shooting the planes down.
+
+A CPU AI player is embedded in the browser engine so the user can play against someone.
+
+Airplanes can be arranged in 4 positions, with the head up, down, left or right.
+
+Hitting the head of the airplane shoots it down.
+
+Hitting the rest of the airplane shows a checkmark.
+
+Hitting space shows a white square.
+
+An English version of the game is also available.
+
+##Limitations:
+Documentation in Romanian, but nothing that Google Translate can't handle.
+Only singleplayer mode supported.
+
+##License:
+Free for non-comercial usage.
