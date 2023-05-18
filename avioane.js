@@ -101,8 +101,7 @@ function startGame() {
 
 
 function initializePlayer(preview) {
-    var y, x;
-	var x, y, i, j, ok, varfx, varfy, nrAvion = 0;
+	let x, y, i, j, ok, varfx, varfy, nrAvion = 0;
 
 	//if(previzualizeaza=="undefined") previzualizeaza=false;
 
