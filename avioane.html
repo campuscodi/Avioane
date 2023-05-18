@@ -9,20 +9,20 @@ body
 }
 #scorebar
 {
-	background: #444444; 
+	background: #444444;
 	color: white;
 	margin-bottom: 20px;
 	padding:2px;
 }
-#scorebar table 
+#scorebar table
 {
 	border: solid 1px #aaaaaa;
 	border-collapse: collapse;
 	color: #ffffff;
 	font-size: 10px
 }
-a img 
-{ 
+a img
+{
 	border: solid 1px #7788ff
 }
 #setupTable
@@ -36,8 +36,8 @@ a img
 .pixel
 {
 	width: 16px;
-	height: 16px; 
-	line-height: 16px; 
+	height: 16px;
+	line-height: 16px;
 	margin: 1px;
 	float: left;
 	font-size: 8px;
@@ -46,7 +46,7 @@ a img
 </style>
 </head>
 
-<body onload="incarcareImagini(); previzualizeaza();">
+<body onload="preview();">
 
 <div id="scorebar">
 <table cellspacing="0" border="1" width="400" align="center">
@@ -132,8 +132,8 @@ a img
 </tr>
 <tr>
 	<td align="center" colspan="4">
-	<input type="button" onclick="javascript:incepeJocul()" value="Start"/>
-	<input type="button" onclick="previzualizeaza()" value="Previzualizeaza"/>
+	<input type="button" onclick="javascript:startGame()" value="Start"/>
+	<input type="button" onclick="preview()" value="preview"/>
 	</td>
 </tr>
 </table>
