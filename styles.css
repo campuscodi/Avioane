@@ -1,0 +1,14 @@
+    a img
+    {
+      border: solid 1px #7788ff;
+      display: inline-block;
+    }
+    .pixel
+    {
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      float: left;
+      font-size: 8px;
+      text-align: center
+    }
