@@ -62,7 +62,7 @@ function startGame() {
 
 
 function initializePlayer(preview) {
-	let x, y, j, p, varfx, varfy, nrAvion = 0;
+	let x, y, j, p, varfx, varfy, nrAvion = 0, orientare;
 
 	//if(previzualizeaza=="undefined") previzualizeaza=false;
 
@@ -91,7 +91,7 @@ function initializePlayer(preview) {
 		varfx = parseInt(varfx) - 1;
 		varfy = parseInt(varfy) - 1;
 
-		let orientare = parseInt(document.getElementById("dir" + j).value);
+		orientare = parseInt(document.getElementById("dir" + j).value);
 
 		// checking the position of the airplane 
 
@@ -136,7 +136,7 @@ function initializePlayer(preview) {
 }
 
 function initializeComputer() {
-	let y, x, p, grid;
+	let y, x, p, grid, orientare;
 	grid = [];
 	for (y = 0; y < gridx; ++y) {
 		grid[y] = [];
@@ -149,7 +149,7 @@ function initializeComputer() {
 		do {
 			varfx = Math.floor(Math.random() * 12 + 2);
 			varfy = Math.floor(Math.random() * 12 + 2);
-			let orientare = Math.round(Math.random() * 3);
+			orientare = Math.round(Math.random() * 3);
 			ok = true;
 
 			// checking the position of the airplane
