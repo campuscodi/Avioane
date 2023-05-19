@@ -27,13 +27,13 @@
         </tr>
         <tr>
           <td class="m-auto text-center border">
-            <span id="vietileJucatorului">5</span>
+            <span id="playerLives">5</span>
           </td>
           <td class="m-auto text-center border">
             <span id="scorulJucatorului">0</span>
           </td>
           <td class="m-auto text-center border">
-            <span id="vietileComputerului">5</span>
+            <span id="computerLives">5</span>
           </td>
           <td class="m-auto text-center border">
             <span id="scorulComputerului">0</span>
@@ -44,7 +44,7 @@
 
     <div class="flex flex-row">
 
-      <table class="mr-2 border">
+      <table class="mr-2 border" id="setupTable">
       <tr>
         <th rowspan="2">Plane</th>
         <th colspan="2">Head</th>
@@ -118,12 +118,19 @@
       </table>
 
       <table align="center" width="700" id="playBoard">
-      <tr><td>
-        <div id="zonaJucatorului" style="float:left;margin-right:10px"></div>
-      </td><td>
-        <div id="zonaComputerului" style="float:left"></div>
-      </td></tr>
-      <tr><td align="center" colspan="2"><div id="reiaJoculButton" style="display:none"><input type="button" onclick="reiaJocul()" value="Replay"/></div></td></tr></table>
+        <tr><td>
+          <div id="playerZone" style="float:left;margin-right:10px"></div>
+        </td><td>
+          <div id="computerZone" style="float:left"></div>
+        </td></tr>
+        <tr>
+          <td align="center" colspan="2">
+            <div id="replayButton" style="display:none">
+              <input type="button" onclick="resetGame()" value="Replay"/>
+            </div>
+          </td>
+        </tr>
+      </table>
 
     </div>
 

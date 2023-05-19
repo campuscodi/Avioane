@@ -1,64 +1,29 @@
 
 
 var gridx = 16, gridy = 16;
-var jucator = [], computer = [];
+var player = [], computer = [];
 var avioaneleJucatorului = [], avioaneleComputerului = [];
-var vietileJucatorului = 0, vietileComputerului = 0;
+var playerLives = 0, computerLives = 0;
 var scorulJucatorului =  0;
 var scorulComputerului = 0;
-var pozitii = [];
+var positions = [];
 var incarcat = [];
 var avionulSelectat = 1;
-var jflag = true;
+var playerTurn = true;
 var  statusmsg = "";
 
-/* SUS */
-pozitii[0] = new Array();
-pozitii[0][0] = [-2,1];
-pozitii[0][1] = [-1,1];
-pozitii[0][2] = [ 0,1];
-pozitii[0][3] = [ 1,1];
-pozitii[0][4] = [ 2,1];
-pozitii[0][5] = [ 0,2];
-pozitii[0][6] = [-1,3];
-pozitii[0][7] = [ 0,3];
-pozitii[0][8] = [ 1,3];
+/* UP */
+positions[0] = [[-2,1], [-1,1], [0,1], [1,1], [2,1], [0,2], [-1,3], [0,3], [1,3]];
 
-/* JOS */
-pozitii[1] = new Array();
-pozitii[1][0] = [-2,-1];
-pozitii[1][1] = [-1,-1];
-pozitii[1][2] = [ 0,-1];
-pozitii[1][3] = [ 1,-1];
-pozitii[1][4] = [ 2,-1];
-pozitii[1][5] = [ 0,-2];
-pozitii[1][6] = [-1,-3];
-pozitii[1][7] = [ 0,-3];
-pozitii[1][8] = [ 1,-3];
+/* DOWN */
+positions[1] = [[-2,-1], [-1,-1], [0,-1], [1,-1], [2,-1], [0,-2], [-1,-3], [0,-3], [1,-3]];
 
-/* STANGA */
-pozitii[2] = new Array();
-pozitii[2][0] = [1,-2];
-pozitii[2][1] = [1,-1];
-pozitii[2][2] = [1, 0];
-pozitii[2][3] = [1, 1];
-pozitii[2][4] = [1, 2];
-pozitii[2][5] = [2, 0];
-pozitii[2][6] = [3,-1];
-pozitii[2][7] = [3, 0];
-pozitii[2][8] = [3, 1];
+/* LEFT */
+positions[2] = [[1,-2], [1,-1], [1,0], [1,1], [1,2], [2,0], [3,-1], [3,0], [3,1]];
 
-/* DREAPTA */
-pozitii[3] = new Array();
-pozitii[3][0] = [-1,-2];
-pozitii[3][1] = [-1,-1];
-pozitii[3][2] = [-1, 0];
-pozitii[3][3] = [-1, 1];
-pozitii[3][4] = [-1, 2];
-pozitii[3][5] = [-2, 0];
-pozitii[3][6] = [-3,-1];
-pozitii[3][7] = [-3, 0];
-pozitii[3][8] = [-3, 1];
+/* RIGHT */
+positions[3] = [[-1,-2], [-1,-1], [-1,0], [-1,1], [-1,2], [-2,0], [-3,-1], [-3,0], [-3,1]];
+
 
 /*****************************/
 
@@ -74,27 +39,28 @@ function loadImages() {
   console.log = "Done";
 }
 
-function reiaJocul(){
-	document.getElementById("reiaJoculButton").style.display="none";
-	document.getElementById("setupTable").style.display="";
-	document.getElementById("zonaJucatorului").innerHTML="";
-	document.getElementById("zonaComputerului").innerHTML="";
-	preview();
+
+function resetGame() {
+  document.getElementById("replayButton").style.display = "none";
+  document.getElementById("setupTable").style.display = "";
+  document.getElementById("playerZone").innerHTML = "";
+  document.getElementById("computerZone").innerHTML = "";
+  preview();
 }
 
 function preview() {
-  jucator = initializePlayer(true);
-  if (jucator) displayGrid(false);
+  player = initializePlayer(true);
+  if (player) displayGrid(false);
 }
 
 function startGame() {
-  if (!(jucator = initializePlayer())) return;
+  if (!(player = initializePlayer(false))) return;
   if (!(computer = initializeComputer())) return;
 
-  jflag = true;
+  playerTurn = true;
   document.getElementById("setupTable").style.display = "none";
-  document.getElementById("vietileJucatorului").innerHTML = vietileJucatorului;
-  document.getElementById("vietileComputerului").innerHTML = vietileComputerului;
+  document.getElementById("playerLives").innerHTML = playerLives;
+  document.getElementById("computerLives").innerHTML = computerLives;
   displayGrid(true);
   displayGrid(false);
 }
@@ -112,7 +78,7 @@ function initializePlayer(preview) {
             grid[y][x] = ["e", -1, 0];
     }
 
-	vietileJucatorului=0;
+	playerLives=0;
 
 	for (j=1;j<6;j++)
 	{
@@ -142,8 +108,8 @@ function initializePlayer(preview) {
 		}
 
 		for(p=0;p<9;p++){
-			pozx = pozitii[orientare][p][0]+varfx;
-			pozy = pozitii[orientare][p][1]+varfy;
+			pozx = positions[orientare][p][0]+varfx;
+			pozy = positions[orientare][p][1]+varfy;
 
 			if( pozx >= gridx || pozx < 0 || pozy >= gridy || pozy < 0  ){
 			alert("Plane "+j+" was not set right!!!");
@@ -159,8 +125,8 @@ function initializePlayer(preview) {
 		}
 
 		for(p=0;p<9;p++){
-			pozx = pozitii[orientare][p][0]+varfx;
-			pozy = pozitii[orientare][p][1]+varfy;
+			pozx = positions[orientare][p][0]+varfx;
+			pozy = positions[orientare][p][1]+varfy;
 			grid[pozy][pozx][0] = "a";
 			grid[pozy][pozx][1] = nrAvion;
 		}
@@ -169,7 +135,7 @@ function initializePlayer(preview) {
 		grid[varfy][varfx][2] = "cap";
 
 		avioaneleJucatorului[nrAvion] = 10;
-		vietileJucatorului++;
+		playerLives++;
         nrAvion++;
 	}
     return grid;
@@ -184,7 +150,7 @@ function initializeComputer() {
             grid[y][x] = ["e", -1, 0];
     }
 	var x,y,i,j,ok,varfx,varfy,nrAvion=0;
-	vietileComputerului=0;
+	computerLives=0;
 	for (j=0;j<5;j++)
 	{
 		do{
@@ -197,8 +163,8 @@ function initializeComputer() {
 			if(grid[varfy][varfx][0] == "a"){ok=false;continue;}
 
 			for(p=0;p<9;p++){
-				pozx = pozitii[orientare][p][0]+varfx;
-				pozy = pozitii[orientare][p][1]+varfy;
+				pozx = positions[orientare][p][0]+varfx;
+				pozy = positions[orientare][p][1]+varfy;
 				if( (pozx >= gridx || pozx < 0) || (pozy >= gridy || pozy < 0)  ){
 					ok=false;break;
 				}
@@ -211,8 +177,8 @@ function initializeComputer() {
 		}while(!ok);
 
 		for(p=0;p<9;p++){
-			pozx = pozitii[orientare][p][0]+varfx;
-			pozy = pozitii[orientare][p][1]+varfy;
+			pozx = positions[orientare][p][0]+varfx;
+			pozy = positions[orientare][p][1]+varfy;
 			grid[pozy][pozx][0] = "a";
 			grid[pozy][pozx][1] = nrAvion;
 		}
@@ -221,7 +187,7 @@ function initializeComputer() {
 		grid[varfy][varfx][2] = "cap";
 
 		avioaneleComputerului[nrAvion] = 10;
-		vietileComputerului++;
+		computerLives++;
         nrAvion++;
 	}
     return grid;
@@ -234,7 +200,7 @@ function seteazaImaginea(y,x,id,ispc) {
         document.images["pc"+y+"_"+x].src = "av"+id+".gif";
     }
     else {
-        jucator[y][x][0] = id;
+        player[y][x][0] = id;
         document.images["ply"+y+"_"+x].src = "av"+id+".gif";
     }
 }
@@ -258,16 +224,16 @@ s='<div class="pixel"></div>';
      for (y=0;y<gridy;y++) {
 		s+='<div class="pixel">'+(y+1)+'</div>';
         for (x=0;x<gridx;x++) {
-                s += '<a href="javascript:jucatorGridClick('+y+','+x+');"><img name="ply'+y+'_'+x+'" src="av'+jucator[y][x][0]+'.gif" width=16 height=16></a>';
+                s += '<a href="javascript:jucatorGridClick('+y+','+x+');"><img name="ply'+y+'_'+x+'" src="av'+player[y][x][0]+'.gif" width=16 height=16></a>';
 		}
 		s+='<br>';
 	 }
  }
 
 if(ispc)
-	document.getElementById("zonaComputerului").innerHTML = "<center>Computer</center>"+s;
+	document.getElementById("computerZone").innerHTML = "<center>Computer</center>"+s;
 else
-	document.getElementById("zonaJucatorului").innerHTML = "<center>Jucator</center>"+s;
+	document.getElementById("playerZone").innerHTML = "<center>Player</center>"+s;
 }
 
 function jucatorGridClick(y,x){
@@ -279,20 +245,20 @@ function jucatorGridClick(y,x){
 }
 
 function gridClick(y,x) {
-    if ( jflag ) {
+    if ( playerTurn ) {
 	if ((computer[y][x][2]=="cap") && (computer[y][x][0]=="a")){
             var nrAvion = computer[y][x][1];
             avioaneleComputerului[nrAvion]=0;
             doboara(computer,nrAvion,true);
             alert("You struck down one of the opponent's planes!!!");
-            if ( --vietileComputerului == 0 ) {
+            if ( --computerLives == 0 ) {
                 alert("YOU WON!!! CONGRATS :)");
 				scorulJucatorului++;
 				document.getElementById("scorulJucatorului").innerHTML=scorulJucatorului;
-				document.getElementById("reiaJoculButton").style.display="";
-                jflag = false;
+				document.getElementById("replayButton").style.display="";
+                playerTurn = false;
             }
-			document.getElementById("vietileComputerului").innerHTML=vietileComputerului;
+			document.getElementById("computerLives").innerHTML=computerLives;
 		} else
 		if (computer[y][x][0]=="a") {
             seteazaImaginea(y,x,"t",true);
@@ -300,18 +266,18 @@ function gridClick(y,x) {
             if ( --avioaneleComputerului[nrAvion] == 0 ) {
             doboara(computer,nrAvion,true);
             alert("TI-A FOST DOBORAT UN AVION!!!");
-            if ( --vietileComputerului == 0 ) {
+            if ( --computerLives == 0 ) {
                 alert("YOU LOST!!! :(");
-                jflag = false;
+                playerTurn = false;
 				scorulJucatorului++;
 				document.getElementById("scorulJucatorului").innerHTML=scorulJucatorului;
-				document.getElementById("reiaJoculButton").style.display="";
+				document.getElementById("replayButton").style.display="";
             }
-			document.getElementById("vietileComputerului").innerHTML=vietileComputerului;
+			document.getElementById("computerLives").innerHTML=computerLives;
         }
 
 
-        if ( jflag ) computerGridClick();
+        if ( playerTurn ) computerGridClick();
     }
     else if (computer[y][x][0] == "e") {
         seteazaImaginea(y,x,"m",true);
@@ -328,26 +294,26 @@ function computerGridClick() {
     for (pass=0;pass<2;++pass) {
         for (y=0;y<gridy && !selected;++y) {
             for (x=0;x<gridx && !selected;++x) {
-                if (jucator[y][x][0]=="t") {
+                if (player[y][x][0]=="t") {
                     sx=x; sy=y;
                     if ( pass == 0 ) {
-                        if ( (x+2<gridx) && (jucator[y][x+1][0]=="t") && ((jucator[y][x+2][0]=="a")||(jucator[y][x+2][0]=="e")))
+                        if ( (x+2<gridx) && (player[y][x+1][0]=="t") && ((player[y][x+2][0]=="a")||(player[y][x+2][0]=="e")))
 									{ sx = x+2; selected=true; }
-						else if ( (x-1>=0) && (x+1<gridx) && (jucator[y][x+1][0]=="t") && ((jucator[y][x-1][0]=="a")||(jucator[y][x-1][0]=="e")))
+						else if ( (x-1>=0) && (x+1<gridx) && (player[y][x+1][0]=="t") && ((player[y][x-1][0]=="a")||(player[y][x-1][0]=="e")))
 									{ sx = x-1; selected=true; }
-						else if ( (y-1>=0) && (y+1<gridy) && (jucator[y+1][x][0]=="t") && ((jucator[y-1][x][0]=="a")||(jucator[y-1][x][0]=="e")))
+						else if ( (y-1>=0) && (y+1<gridy) && (player[y+1][x][0]=="t") && ((player[y-1][x][0]=="a")||(player[y-1][x][0]=="e")))
 									{ sy = y-1; selected=true; }
-						else if ( (y+2<gridy) && (jucator[y+1][x][0]=="t") && ((jucator[y+2][x][0]=="a")||(jucator[y+2][x][0]=="e")))
+						else if ( (y+2<gridy) && (player[y+1][x][0]=="t") && ((player[y+2][x][0]=="a")||(player[y+2][x][0]=="e")))
 									{ sy = y+2; selected=true; }
                     }
                     else {
-                        if ( (x-1>=0) && ((jucator[y][x-1][0]=="a")||(jucator[y][x-1][0]=="e")))
+                        if ( (x-1>=0) && ((player[y][x-1][0]=="a")||(player[y][x-1][0]=="e")))
 									{ sx = x-1; selected=true; }
-                        else if ( (x+1<gridx) && ((jucator[y][x+1][0]=="a")||(jucator[y][x+1][0]=="e")))
+                        else if ( (x+1<gridx) && ((player[y][x+1][0]=="a")||(player[y][x+1][0]=="e")))
 									{ sx = x+1; selected=true; }
-                        else if ( (y-1>=0) && ((jucator[y-1][x][0]=="a")||(jucator[y-1][x][0]=="e")))
+                        else if ( (y-1>=0) && ((player[y-1][x][0]=="a")||(player[y-1][x][0]=="e")))
 									{ sy = y-1; selected=true; }
-                        else if ( (y+1<gridy) && ((jucator[y+1][x][0]=="a")||(jucator[y+1][x][0]=="e")))
+                        else if ( (y+1<gridy) && ((player[y+1][x][0]=="a")||(player[y+1][x][0]=="e")))
 									{ sy = y+1; selected=true; }
                     }
                 }
@@ -359,48 +325,48 @@ function computerGridClick() {
         do{
             sy = Math.floor(Math.random() * (gridy-1));
             sx = Math.floor(Math.random() * (gridx-1));
-        } while( (jucator[sy][sx][0]=="t") || (jucator[sy][sx][0]=="d") || (jucator[sy][sx][0]=="m") );
+        } while( (player[sy][sx][0]=="t") || (player[sy][sx][0]=="d") || (player[sy][sx][0]=="m") );
     }
 
-   if ((jucator[sy][sx][2]=="cap") && (jucator[sy][sx][0]=="a")) {
+   if ((player[sy][sx][2]=="cap") && (player[sy][sx][0]=="a")) {
             seteazaImaginea(sy,sx,"t",false);
-            var nrAvion = jucator[sy][sx][1];
+            var nrAvion = player[sy][sx][1];
             avioaneleJucatorului[nrAvion]=0;
-            doboara(jucator,nrAvion,false);
+            doboara(player,nrAvion,false);
             alert("One of your planes was struck down!");
-            if ( --vietileJucatorului == 0 ) {
+            if ( --playerLives == 0 ) {
 				afiseazaDusmanul();
                 alert("YOU LOST :(\n");
-                jflag = false;
+                playerTurn = false;
 
 				scorulComputerului++;
 				document.getElementById("scorulComputerului").innerHTML=scorulComputerului;
-				document.getElementById("reiaJoculButton").style.display="";
+				document.getElementById("replayButton").style.display="";
 
             }
 		} else
-		if (jucator[sy][sx][0]=="a") {
+		if (player[sy][sx][0]=="a") {
             seteazaImaginea(sy,sx,"t",false);
-            var nrAvion = jucator[sy][sx][1];
+            var nrAvion = player[sy][sx][1];
             if ( --avioaneleJucatorului[nrAvion] == 0 ) {
-            doboara(jucator,nrAvion,false);
+            doboara(player,nrAvion,false);
             alert("One of your planes was struck down!!!");
-            if ( --vietileJucatorului == 0 ) {
+            if ( --playerLives == 0 ) {
 		        afiseazaDusmanul();
                 alert("YOU LOST :(\n");
-                jflag = false;
+                playerTurn = false;
 
 				scorulComputerului++;
 				document.getElementById("scorulComputerului").innerHTML=scorulComputerului;
-				document.getElementById("reiaJoculButton").style.display="";
+				document.getElementById("replayButton").style.display="";
 
             }
         }
     }
-    else if (jucator[sy][sx][0] == "e") {
+    else if (player[sy][sx][0] == "e") {
         seteazaImaginea(sy,sx,"m",false);
      }
-	document.getElementById("vietileJucatorului").innerHTML=vietileJucatorului;
+	document.getElementById("playerLives").innerHTML=playerLives;
 }
 
 
