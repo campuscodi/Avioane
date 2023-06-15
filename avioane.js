@@ -64,8 +64,6 @@ function startGame() {
 function initializePlayer(preview) {
 	let x, y, j, p, varfx, varfy, nrAvion = 0, orientare;
 
-	//if(previzualizeaza=="undefined") previzualizeaza=false;
-
 	let grid = [];
 	for (y = 0; y < gridx; ++y) {
 		grid[y] = [];
@@ -281,25 +279,25 @@ function gridClick(y, x) {
 
 function computerGridClick() {
 	let x, y, pass;
-	let sx, sy;
+	let selectedX, selectedY;
 	let selected = false;
 
 	for (pass = 0; pass < 2; ++pass) {
 		for (y = 0; y < gridy && !selected; ++y) {
 			for (x = 0; x < gridx && !selected; ++x) {
 				if (player[y][x][0] == "t") {
-					sx = x; sy = y;
+					selectedX = x; selectedY = y;
 					if (pass == 0) {
-						if ((x + 2 < gridx) && (player[y][x + 1][0] == "t") && ((player[y][x + 2][0] == "a") || (player[y][x + 2][0] == "e"))) { sx = x + 2; selected = true; }
-						else if ((x - 1 >= 0) && (x + 1 < gridx) && (player[y][x + 1][0] == "t") && ((player[y][x - 1][0] == "a") || (player[y][x - 1][0] == "e"))) { sx = x - 1; selected = true; }
-						else if ((y - 1 >= 0) && (y + 1 < gridy) && (player[y + 1][x][0] == "t") && ((player[y - 1][x][0] == "a") || (player[y - 1][x][0] == "e"))) { sy = y - 1; selected = true; }
-						else if ((y + 2 < gridy) && (player[y + 1][x][0] == "t") && ((player[y + 2][x][0] == "a") || (player[y + 2][x][0] == "e"))) { sy = y + 2; selected = true; }
+						if ((x + 2 < gridx) && (player[y][x + 1][0] == "t") && ((player[y][x + 2][0] == "a") || (player[y][x + 2][0] == "e"))) { selectedX = x + 2; selected = true; }
+						else if ((x - 1 >= 0) && (x + 1 < gridx) && (player[y][x + 1][0] == "t") && ((player[y][x - 1][0] == "a") || (player[y][x - 1][0] == "e"))) { selectedX = x - 1; selected = true; }
+						else if ((y - 1 >= 0) && (y + 1 < gridy) && (player[y + 1][x][0] == "t") && ((player[y - 1][x][0] == "a") || (player[y - 1][x][0] == "e"))) { selectedY = y - 1; selected = true; }
+						else if ((y + 2 < gridy) && (player[y + 1][x][0] == "t") && ((player[y + 2][x][0] == "a") || (player[y + 2][x][0] == "e"))) { selectedY = y + 2; selected = true; }
 					}
 					else {
-						if ((x - 1 >= 0) && ((player[y][x - 1][0] == "a") || (player[y][x - 1][0] == "e"))) { sx = x - 1; selected = true; }
-						else if ((x + 1 < gridx) && ((player[y][x + 1][0] == "a") || (player[y][x + 1][0] == "e"))) { sx = x + 1; selected = true; }
-						else if ((y - 1 >= 0) && ((player[y - 1][x][0] == "a") || (player[y - 1][x][0] == "e"))) { sy = y - 1; selected = true; }
-						else if ((y + 1 < gridy) && ((player[y + 1][x][0] == "a") || (player[y + 1][x][0] == "e"))) { sy = y + 1; selected = true; }
+						if ((x - 1 >= 0) && ((player[y][x - 1][0] == "a") || (player[y][x - 1][0] == "e"))) { selectedX = x - 1; selected = true; }
+						else if ((x + 1 < gridx) && ((player[y][x + 1][0] == "a") || (player[y][x + 1][0] == "e"))) { selectedX = x + 1; selected = true; }
+						else if ((y - 1 >= 0) && ((player[y - 1][x][0] == "a") || (player[y - 1][x][0] == "e"))) { selectedY = y - 1; selected = true; }
+						else if ((y + 1 < gridy) && ((player[y + 1][x][0] == "a") || (player[y + 1][x][0] == "e"))) { selectedY = y + 1; selected = true; }
 					}
 				}
 			}
@@ -308,52 +306,39 @@ function computerGridClick() {
 
 	if (!selected) {
 		do {
-			sy = Math.floor(Math.random() * (gridy - 1));
-			sx = Math.floor(Math.random() * (gridx - 1));
-		} while ((player[sy][sx][0] == "t") || (player[sy][sx][0] == "d") || (player[sy][sx][0] == "m"));
+			selectedY = Math.floor(Math.random() * (gridy - 1));
+			selectedX = Math.floor(Math.random() * (gridx - 1));
+		} while ((player[selectedY][selectedX][0] == "t") || (player[selectedY][selectedX][0] == "d") || (player[selectedY][selectedX][0] == "m"));
 	}
 
-	if ((player[sy][sx][2] == "cap") && (player[sy][sx][0] == "a")) {
-		setImage(sy, sx, "t", false);
-		let nrAvion = player[sy][sx][1];
-		playerAirplanes[nrAvion] = 0;
-		shootDownAirplane(player, nrAvion, false);
-		alert("One of your planes was struck down!");
-		if (--playerLives == 0) {
-			displayEnemyAirplanes();
-			alert("YOU LOST :(\n");
-			playerTurn = false;
-
-			computerScore++;
-			document.getElementById("computerScore").innerHTML = computerScore;
-			document.getElementById("replayButton").style.display = "";
-
+	if ((player[selectedY][selectedX][2] == "cap") || (player[selectedY][selectedX][0] == "a")) {
+		setImage(selectedY, selectedX, "t", false);
+		let nrAvion = player[selectedY][selectedX][1];
+		if(player[selectedY][selectedX][2] == "cap") {
+			playerAirplanes[nrAvion] = 1;
 		}
-	} else
-		if (player[sy][sx][0] == "a") {
-			setImage(sy, sx, "t", false);
-			let nrAvion = player[sy][sx][1];
-			if (--playerAirplanes[nrAvion] == 0) {
-				shootDownAirplane(player, nrAvion, false);
-				alert("One of your planes was struck down!!!");
-				if (--playerLives == 0) {
-					displayEnemyAirplanes();
-					alert("YOU LOST :(\n");
-					playerTurn = false;
-
-					computerScore++;
-					document.getElementById("computerScore").innerHTML = computerScore;
-					document.getElementById("replayButton").style.display = "";
-
-				}
-			}
+		if (--playerAirplanes[nrAvion] == 0) {
+			shootDownAirplane(player, nrAvion, false);
+			alert("One of your planes was struck down!!!");
+			playerLostLive()
 		}
-		else if (player[sy][sx][0] == "e") {
-			setImage(sy, sx, "m", false);
-		}
+	} else if (player[selectedY][selectedX][0] == "e") {
+		setImage(selectedY, selectedX, "m", false);
+	}
 	document.getElementById("playerLives").innerHTML = playerLives;
 }
 
+function playerLostLive() {
+	if (--playerLives == 0) {
+		displayEnemyAirplanes();
+		alert("YOU LOST :(\n");
+		playerTurn = false;
+
+		computerScore++;
+		document.getElementById("computerScore").innerHTML = computerScore;
+		document.getElementById("replayButton").style.display = "";
+	}
+}
 
 function shootDownAirplane(grid, nrAvion, isComputer) {
 	let y, x;
