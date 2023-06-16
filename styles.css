@@ -1,14 +1,132 @@
-    a img
-    {
-      border: solid 1px #7788ff;
-      display: inline-block;
-    }
-    .pixel
-    {
-      width: 16px;
-      height: 16px;
-      line-height: 16px;
-      float: left;
-      font-size: 8px;
-      text-align: center
-    }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-family: "Inter", sans-serif;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a img
+{
+  border: solid 1px #7dd3fc;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+.pixel
+{
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  float: left;
+  font-size: 8px;
+  text-align: center
+}
+
+.scoreboard {
+  width: 100vw;
+  height: 128px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F5F5F4;
+  border-bottom: 1px solid #d6d3d1;
+  color: #292524
+}
+
+.logo {
+  height: 96px;
+  margin: 0 64px
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+}
+
+.scores h1{
+  font-size: 48px;
+}
+
+.scoreboard  span {
+  font-weight: 600;
+}
+
+/* Player side */
+
+.scoreboard .playerSideScore {
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px
+}
+
+.scoreboard .playerSideScore h2{
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.scoreboard .playerSideScore div{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* Computer side */
+
+.scoreboard .computerSideScore {
+  margin-right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px
+}
+
+.scoreboard .computerSideScore h2{
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.scoreboard .computerSideScore div{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
