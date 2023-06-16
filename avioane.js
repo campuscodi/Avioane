@@ -35,7 +35,7 @@ function loadImages() {
 	console.log = "Loading images... Please wait...";
 	for (const element of ids) {
 		let img = new Image();
-		let name = "av" + element + ".gif";
+		let name = "assets/av" + element + ".png";
 		img.src = name;
 		// Assign the loaded image to a global variable or use it as needed
 	}
@@ -203,11 +203,11 @@ function initializeComputer() {
 function setImage(y, x, id, isComputer) {
 	if (isComputer) {
 		computer[y][x][0] = id;
-		document.images["pc" + y + "_" + x].src = "av" + id + ".gif";
+		document.images["pc" + y + "_" + x].src = "assets/av" + id + ".png";
 	}
 	else {
 		player[y][x][0] = id;
-		document.images["ply" + y + "_" + x].src = "av" + id + ".gif";
+		document.images["ply" + y + "_" + x].src = "assets/av" + id + ".png";
 	}
 }
 
@@ -222,7 +222,7 @@ function displayGrid(isComputer) {
 		for (y = 0; y < gridY; y++) {
 			s += '<div class="pixel">' + (y + 1) + '</div>';
 			for (x = 0; x < gridX; x++) {
-				s += '<a href="javascript:gridClick(' + y + ',' + x + ');"><img name="pc' + y + '_' + x + '" src="ave.gif" width=16 height=16></a>';
+				s += '<a href="javascript:gridClick(' + y + ',' + x + ');"><img name="pc' + y + '_' + x + '" src="assets/ave.png" width=16 height=16></a>';
 			}
 			s += '<br>';
 		}
@@ -230,7 +230,7 @@ function displayGrid(isComputer) {
 		for (y = 0; y < gridY; y++) {
 			s += '<div class="pixel">' + (y + 1) + '</div>';
 			for (x = 0; x < gridX; x++) {
-				s += '<a href="javascript:playerGridClick(' + y + ',' + x + ');"><img name="ply' + y + '_' + x + '" src="av' + player[y][x][0] + '.gif" width=16 height=16></a>';
+				s += '<a href="javascript:playerGridClick(' + y + ',' + x + ');"><img name="ply' + y + '_' + x + '" src="assets/av' + player[y][x][0] + '.png" width=16 height=16></a>';
 			}
 			s += '<br>';
 		}
