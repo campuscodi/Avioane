@@ -23,7 +23,7 @@ positions[3] = [[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2], [-2, 0], [-3, -1]
 /*****************************/
 
 function loadImages() {
-	const ids = ["e", "avion", "t", "d", "m"];
+	const ids = ["e", "a", "t", "d", "m"];
 	console.log = "Loading images... Please wait...";
 	for (const element of ids) {
 		let img = new Image();
