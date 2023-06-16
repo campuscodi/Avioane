@@ -59,8 +59,8 @@ function preview() {
 function startGame() {
 	player = initializePlayer(false)
 	computer = initializeComputer()
-	if (player != []) return;
-	if (computer != []) return;
+	if (player == []) return;
+	if (computer == []) return;
 
 	playerTurn = true;
 	document.getElementById("setupTable").style.display = "none";
