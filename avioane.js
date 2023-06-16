@@ -22,8 +22,16 @@ positions[3] = [[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2], [-2, 0], [-3, -1]
 
 /*****************************/
 
+const ids = ["e", "a", "t", "d", "m"];
+const imagesIds = {
+	Airplane: "a",
+	Down: "d",
+	Unknown: "e",
+	Marked: "m",
+	Taken: "t"
+};
+
 function loadImages() {
-	const ids = ["e", "avion", "t", "d", "m"];
 	console.log = "Loading images... Please wait...";
 	for (const element of ids) {
 		let img = new Image();
@@ -51,8 +59,8 @@ function preview() {
 function startGame() {
 	player = initializePlayer(false)
 	computer = initializeComputer()
-	if (player != []) return;
-	if (computer != []) return;
+	if (player == []) return;
+	if (computer == []) return;
 
 	playerTurn = true;
 	document.getElementById("setupTable").style.display = "none";
@@ -70,7 +78,7 @@ function initializePlayer(preview) {
 	for (y = 0; y < gridX; ++y) {
 		grid[y] = [];
 		for (x = 0; x < gridX; ++x)
-			grid[y][x] = ["e", -1, 0];
+			grid[y][x] = [imagesIds.Unknown, -1, 0];
 	}
 
 	playerLives = 0;
@@ -259,7 +267,7 @@ function gridClick(y, x) {
 			document.getElementById("computerLives").innerHTML = computerLives;
 		} else
 			if (computer[y][x][0] == "a") {
-				setImage(y, x, "t", true);
+				setImage(y, x, imagesIds.Taken, true);
 				let nrAvion = computer[y][x][1];
 				if (--computerAirplanes[nrAvion] == 0) {
 					shootDownAirplane(computer, nrAvion, true);
@@ -278,7 +286,7 @@ function gridClick(y, x) {
 				if (playerTurn) computerGridClick();
 			}
 			else if (computer[y][x][0] == "e") {
-				setImage(y, x, "m", true);
+				setImage(y, x, imagesIds.Marked, true);
 				computerGridClick();
 			}
 	}
@@ -296,13 +304,13 @@ function computerGridClick() {
 				if ((x - 1 >= 0) && ((player[y][x - 1][0] == "a") || (player[y][x - 1][0] == "e"))) {
 					selectedX = x - 1;
 					selected = true;
-				} else if ((x + 1 < gridx) && ((player[y][x + 1][0] == "a") || (player[y][x + 1][0] == "e"))) {
+				} else if ((x + 1 < gridX) && ((player[y][x + 1][0] == "a") || (player[y][x + 1][0] == "e"))) {
 					selectedX = x + 1;
 					selected = true;
 				} else if ((y - 1 >= 0) && ((player[y - 1][x][0] == "a") || (player[y - 1][x][0] == "e"))) {
 					selectedY = y - 1;
 					selected = true;
-				} else if ((y + 1 < gridy) && ((player[y + 1][x][0] == "a") || (player[y + 1][x][0] == "e"))) {
+				} else if ((y + 1 < gridY) && ((player[y + 1][x][0] == "a") || (player[y + 1][x][0] == "e"))) {
 					selectedY = y + 1;
 					selected = true;
 				}
@@ -318,7 +326,7 @@ function computerGridClick() {
 	}
 
 	if ((player[selectedY][selectedX][2] == "cap") || (player[selectedY][selectedX][0] == "a")) {
-		setImage(selectedY, selectedX, "t", false);
+		setImage(selectedY, selectedX, imagesIds.Taken, false);
 		let nrAvion = player[selectedY][selectedX][1];
 		if (player[selectedY][selectedX][2] == "cap") {
 			playerAirplanes[nrAvion] = 1;
@@ -329,7 +337,7 @@ function computerGridClick() {
 			playerLostLive()
 		}
 	} else if (player[selectedY][selectedX][0] == "e") {
-		setImage(selectedY, selectedX, "m", false);
+		setImage(selectedY, selectedX, imagesIds.Marked, false);
 	}
 
 	document.getElementById("playerLives").innerHTML = playerLives;
@@ -352,8 +360,8 @@ function shootDownAirplane(grid, nrAvion, isComputer) {
 	for (y = 0; y < gridX; ++y) {
 		for (x = 0; x < gridX; ++x) {
 			if (grid[y][x][1] == nrAvion)
-				if (isComputer) setImage(y, x, "d", true);
-				else setImage(y, x, "d", false);
+				if (isComputer) setImage(y, x, imagesIds.Down, true);
+				else setImage(y, x, imagesIds.Down, false);
 		}
 	}
 }
@@ -365,9 +373,9 @@ function displayEnemyAirplanes() {
 	for (y = 0; y < gridX; ++y) {
 		for (x = 0; x < gridX; ++x) {
 			if (computer[y][x][0] == "t")
-				setImage(y, x, "d", true);
+				setImage(y, x, imagesIds.Down, true);
 			else if (computer[y][x][0] == "a")
-				setImage(y, x, "a", true);
+				setImage(y, x, imagesIds.Airplane, true);
 		}
 	}
 }
