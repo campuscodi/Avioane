@@ -5,8 +5,8 @@
 
 	<script type="text/javascript" src="avioane.js"></script>
 
-	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.cdnfonts.com/css/inter?styles=29139,29142,29132,29135,29137,29140,29128,29130,29126" rel="stylesheet">
 
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,33 +14,24 @@
 </head>
 
 <body onload="preview()">
-
-	<div id="scorebar" class="justify-items-center ">
-		<table class="border w-2/3 object-center m-auto my-6">
-			<tr>
-				<th class="border" colspan="2">Player</th>
-				<th class="border" colspan="2">Computer</th>
-			</tr>
-			<th class="w-1/4 border">Left Planes</th>
-			<th class="w-1/4 border">Score</th>
-			<th class="w-1/4 border">Left Planes</th>
-			<th class="w-1/4 border">Score</th>
-			</tr>
-			<tr>
-				<td class="m-auto text-center border">
-					<span id="playerLives">5</span>
-				</td>
-				<td class="m-auto text-center border">
-					<span id="playerScore">0</span>
-				</td>
-				<td class="m-auto text-center border">
-					<span id="computerLives">5</span>
-				</td>
-				<td class="m-auto text-center border">
-					<span id="computerScore">0</span>
-				</td>
-			</tr>
-		</table>
+	<div class="scoreboard">
+    <div class="playerSideScore">
+      <h2>Player</h2>
+      <div>
+        <p>Planes Left: <span id="playerLives">5</span></p>
+      </div>
+    </div>
+    <div class="scores">
+      <h1><span id="playerScore">0</span></h1>
+      <image src="assets/logo.svg" class="logo" />
+      <h1><span id="computerScore">0</span></h1>
+    </div>
+    <div class="computerSideScore">
+      <h2>Computer</h2>
+      <div>
+        <p>Planes Left: <span id="computerLives">5</span></p>
+      </div>
+    </div>
 	</div>
 
 	<div class="flex flex-row">
@@ -118,7 +109,7 @@
 			</tr>
 		</table>
 
-		<table align="center" width="700" id="playBoard">
+		<table id="playBoard">
 			<tr>
 				<td>
 					<div id="playerZone" style="float:left;margin-right:10px"></div>
@@ -137,7 +128,6 @@
 		</table>
 
 	</div>
-
 </body>
 
 </html>
