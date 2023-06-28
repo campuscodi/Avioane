@@ -270,14 +270,86 @@ button:not(:hover) .overlay {
   background-color: #F5F5F4;
   height: 100%;
   border-radius: 16px;
-  width: 20vw;
   border: 1px solid #d6d3d1;
   margin-top: 24px;
 }
 
 #setupTable div {
   display: flex;
-  justify-content: space-around;
+}
+
+#setupTable .title {
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+#setupTable .title p:last-child{
+  padding-left: 32px
+}
+
+.plane {
+  justify-content: left !important;
+  align-items: center;
+  margin: 4px 0
+}
+.plane p {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  margin-right: 16px;
+}
+
+.plane input {
+  border: 0;
+  width: 48px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d6d3d1;
+  padding: 4px;
+  margin-right: 4px;
+}
+
+.plane select {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d6d3d1;
+  padding: 4px;
+  width: 80px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px !important;
+  gap: 4px;
+}
+
+.start, .preview {
+  background-color: #f43f5e;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #F5F5F4;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 12px;
+  padding: 8px 16px;
+}
+
+.start:hover, .preview:hover {
+  background-color: #d92b48;
+  transition: background-color 0.1s ease;
+}
+
+.start {
+  width: 100%;
+  font-weight: 600;
+}
+
+.preview {
+  font-weight: 400;
 }
 
 #replayButton{

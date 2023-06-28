@@ -38,83 +38,71 @@
       <div id="playBoard">
         <div id="playerZone"></div>
         <div id="setupTable">
-          <div>
-            <p rowspan="2">Plane</p>
+          <div class="title">
+            <p>Plane</p>
             <p>Head</p>
             <p>Direction</p>
           </div>
-          <div>
-            <p>X</p>
-            <p>Y</p>
-          </div>
-          <div>
-            <td>1.</td>
-            <td><input type="text" size="5" id="pozx1" onfocus="javascript:selectedAirplane=1" /></td>
-            <td><input type="text" size="5" id="pozy1" onfocus="javascript:selectedAirplane=1" /></td>
-            <td>
+          <div class="plane">
+            <p>1.</p>
+            <input type="text" size="5" id="pozx1" placeholder="X" onfocus="javascript:selectedAirplane=1" />
+            <input type="text" size="5" id="pozy1" placeholder="Y" onfocus="javascript:selectedAirplane=1" />
               <select id="dir1" onfocus="javascript:selectedAirplane=1">
                 <option value="0">UP</option>
                 <option value="1">DOWN</option>
                 <option value="2">LEFT</option>
                 <option value="3">RIGHT</option>
               </select>
-            </td>
           </div>
-          <div>
-            <td>2.</td>
-            <td><input type="text" size="5" id="pozx2" onfocus="javascript:selectedAirplane=2" /></td>
-            <td><input type="text" size="5" id="pozy2" onfocus="javascript:selectedAirplane=2" /></td>
-            <td>
-              <select id="dir2" onfocus="javascript:selectedAirplane=2">
-                <option value="0">UP</option>
-                <option value="1">DOWN</option>
-                <option value="2">LEFT</option>
-                <option value="3">RIGHT</option>
-              </select>
-            </td>
+          <div class="plane">
+            <p>2.</p>
+            <input type="text" size="5" id="pozx2" placeholder="X" onfocus="javascript:selectedAirplane=2" />
+            <input type="text" size="5" id="pozy2" placeholder="Y" onfocus="javascript:selectedAirplane=2" />
+            <select id="dir2" onfocus="javascript:selectedAirplane=2">
+              <option value="0">UP</option>
+              <option value="1">DOWN</option>
+              <option value="2">LEFT</option>
+              <option value="3">RIGHT</option>
+            </select>
           </div>
-          <div>
-            <td>3.</td>
-            <td><input type="text" size="5" id="pozx3" onfocus="javascript:selectedAirplane=3" /></td>
-            <td><input type="text" size="5" id="pozy3" onfocus="javascript:selectedAirplane=3" /></td>
-            <td>
+          <div class="plane">
+            <p>3.</p>
+            <input type="text" size="5" id="pozx3" placeholder="X" onfocus="javascript:selectedAirplane=3" />
+            <input type="text" size="5" id="pozy3" placeholder="Y" onfocus="javascript:selectedAirplane=3" />
+
               <select id="dir3" onfocus="javascript:selectedAirplane=3">
                 <option value="0">UP</option>
                 <option value="1">DOWN</option>
                 <option value="2">LEFT</option>
                 <option value="3">RIGHT</option>
               </select>
-            </td>
+
           </div>
-          <div>
-            <td>4.</td>
-            <td><input type="text" size="5" id="pozx4" onfocus="javascript:selectedAirplane=4" /></td>
-            <td><input type="text" size="5" id="pozy4" onfocus="javascript:selectedAirplane=4" /></td>
-            <td>
+          <div class="plane">
+            <p>4.</p>
+            <input type="text" size="5" id="pozx4" placeholder="X" onfocus="javascript:selectedAirplane=4" />
+            <input type="text" size="5" id="pozy4" placeholder="Y" onfocus="javascript:selectedAirplane=4" />
               <select id="dir4" onfocus="javascript:selectedAirplane=4">
                 <option value="0">UP</option>
                 <option value="1">DOWN</option>
                 <option value="2">LEFT</option>
                 <option value="3">RIGHT</option>
               </select>
-            </td>
           </div>
-          <div>
-            <td>5.</td>
-            <td><input type="text" size="5" id="pozx5" onfocus="javascript:selectedAirplane=5" /></td>
-            <td><input type="text" size="5" id="pozy5" onfocus="javascript:selectedAirplane=5" /></td>
-            <td><select id="dir5" onfocus="javascript:selectedAirplane=5">
+          <div class="plane">
+            <p>5.</p>
+            <input type="text" size="5" id="pozx5" placeholder="X" onfocus="javascript:selectedAirplane=5" />
+            <input type="text" size="5" id="pozy5" placeholder="Y" onfocus="javascript:selectedAirplane=5" />
+            <select id="dir5" onfocus="javascript:selectedAirplane=5">
                 <option value="0">UP</option>
                 <option value="1">DOWN</option>
                 <option value="2">LEFT</option>
                 <option value="3">RIGHT</option>
-              </select></td>
+              </select>
             </div>
-          <div>
-            <td align="center" colspan="4">
-              <input type="button" onclick="javascript:startGame()" value="Start" />
-              <input type="button" onclick="preview()" value="preview" />
-            </td>
+          <div class="buttons">
+            <button class="start" type="button" onclick="javascript:startGame()">Start</button>
+            <button class="preview" type="button" onclick="preview()">Preview</button>
           </div>
         </div>
         <div id="computerZone"></div>
