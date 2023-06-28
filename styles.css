@@ -1,3 +1,4 @@
+/* CSS reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -11,52 +12,150 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font-family: "Inter", sans-serif;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: "Inter", sans-serif;
+  vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  display: block;
 }
 
-a img
-{
-  border: solid 1px #7dd3fc;
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+button img {
+  border-radius: 4px;
   display: inline-block;
   width: 24px;
   height: 24px;
 }
-.pixel
-{
+
+button {
+  padding: 0px;
+  border: solid 1px #ffff;
+  margin: 0px;
+  background-color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  opacity: 0;
+  transition: background-color 0.1s ease, opacity 0.1s ease;
+  border-radius: 4px;
+}
+
+button:hover .overlay {
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: background-color 0s ease; /* Adjust the opacity as needed */
+  opacity: 1;
+}
+
+button .overlay {
+  transition: background-color 0.5s ease, opacity 0.5s ease;
+}
+
+button:not(:hover) .overlay {
+  transition-delay: 0.5s; /* Delay the transition back to transparent */
+  background-color: rgba(255, 255, 255, 0.25);
+  opacity: 0;
+}
+
+.pixel {
   width: 16px;
   height: 16px;
   line-height: 16px;
   float: left;
-  font-size: 8px;
-  text-align: center
+  font-size: 12px;
+  text-align: center;
+}
+
+.only-numbers-row {
+  display: flex;
+}
+
+#playerZone .only-numbers-row {
+  margin-left: 32px;
+}
+
+.row {
+  display: flex;
+}
+
+#computerZone {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#computerZone .row {
+  justify-content: flex-end;
+}
+
+#computerZone .only-numbers-row {
+  margin-right: 32px;
+  justify-content: flex-end;
+}
+
+.number-x {
+  width: 24px;
+  height: 24px;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  font-size: 12px;
+  border: #fff 1px solid;
+}
+
+.number-y {
+  width: 24px;
+  height: 24px;
+  display: block;
+  line-height: 24px;
+  font-size: 12px;
+}
+
+#playerZone .number-y {
+  text-align: right;
+  margin-right: 8px;
+}
+
+#computerZone .number-y {
+  margin-left: 8px;
 }
 
 .scoreboard {
@@ -68,12 +167,12 @@ a img
   justify-content: space-between;
   background-color: #F5F5F4;
   border-bottom: 1px solid #d6d3d1;
-  color: #292524
+  color: #292524;
 }
 
 .logo {
   height: 96px;
-  margin: 0 64px
+  margin: 0 64px;
 }
 
 .scores {
@@ -81,52 +180,121 @@ a img
   align-items: center;
 }
 
-.scores h1{
+.scores h1 {
   font-size: 48px;
 }
 
-.scoreboard  span {
+.scoreboard span {
   font-weight: 600;
 }
 
 /* Player side */
-
 .scoreboard .playerSideScore {
-  margin-left: 32px;
+  margin-left: 64px;
   display: flex;
   flex-direction: column;
-  gap: 4px
+  gap: 4px;
 }
 
-.scoreboard .playerSideScore h2{
+.scoreboard .playerSideScore h2 {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
 }
 
-.scoreboard .playerSideScore div{
+.scoreboard .playerSideScore div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
 /* Computer side */
-
 .scoreboard .computerSideScore {
-  margin-right: 32px;
+  margin-right: 64px;
   display: flex;
   flex-direction: column;
-  gap: 4px
+  gap: 4px;
 }
 
-.scoreboard .computerSideScore h2{
+.scoreboard .computerSideScore h2 {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
+  text-align: right;
 }
 
-.scoreboard .computerSideScore div{
+.scoreboard .computerSideScore div {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.number-x {
+  width: 24px;
+  height: 24px;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  font-size: 12px;
+  border: #fff 1px solid;
+}
+
+.number-y {
+  width: 24px;
+  height: 24px;
+  display: block;
+  line-height: 24px;
+  font-size: 12px;
+}
+
+#playBoard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding: 0 32px;
+}
+
+#playerZone,
+#computerZone {
+  width: 32vw;
+}
+
+#computerZone {
+  margin-right: 0;
+}
+
+#setupTable {
+  display: block;
+  padding: 32px;
+  background-color: #F5F5F4;
+  height: 100%;
+  border-radius: 16px;
+  width: 20vw;
+  border: 1px solid #d6d3d1;
+  margin-top: 24px;
+}
+
+#setupTable div {
+  display: flex;
+  justify-content: space-around;
+}
+
+#replayButton{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+#replayButton input{
+  background-color: #f43f5e;
+  border: 0;
+  border-radius: 32px;
+  cursor: pointer;
+  color: #F5F5F4;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 16px;
+  padding: 16px 32px;
 }
