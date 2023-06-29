@@ -80,7 +80,7 @@ button {
 }
 
 button:hover .overlay {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.4);
   transition: background-color 0s ease; /* Adjust the opacity as needed */
   opacity: 1;
 }
@@ -91,7 +91,7 @@ button .overlay {
 
 button:not(:hover) .overlay {
   transition-delay: 0.5s; /* Delay the transition back to transparent */
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.4);
   opacity: 0;
 }
 
@@ -332,13 +332,12 @@ button:not(:hover) .overlay {
   border-radius: 8px;
   cursor: pointer;
   color: #F5F5F4;
-  font-family: "Inter";
   font-weight: 500;
   font-size: 12px;
   padding: 8px 16px;
 }
 
-.start:hover, .preview:hover {
+.start:hover, .preview:hover, #replayButton:hover button {
   background-color: #d92b48;
   transition: background-color 0.1s ease;
 }
@@ -359,13 +358,12 @@ button:not(:hover) .overlay {
   margin-top: 32px;
 }
 
-#replayButton input{
+#replayButton button{
   background-color: #f43f5e;
   border: 0;
   border-radius: 32px;
   cursor: pointer;
   color: #F5F5F4;
-  font-family: "Inter";
   font-weight: 500;
   font-size: 16px;
   padding: 16px 32px;
