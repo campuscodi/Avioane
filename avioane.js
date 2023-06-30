@@ -6,6 +6,7 @@ let playerScore = 0, computerScore = 0;
 let positions = [];
 let selectedAirplane = 1;
 let playerTurn = true;
+let canEditGrid = true
 
 /* UP */
 positions[0] = [[-2, 1], [-1, 1], [0, 1], [1, 1], [2, 1], [0, 2], [-1, 3], [0, 3], [1, 3]];
@@ -32,6 +33,7 @@ const imagesIds = {
 };
 
 function loadImages() {
+	console.log("loadImages/0")
 	console.log = "Loading images... Please wait...";
 	for (const element of ids) {
 		let img = new Image();
@@ -44,6 +46,8 @@ function loadImages() {
 
 
 function resetGame() {
+	canEditGrid = true;
+	console.log("resetGame/0")
 	document.getElementById("replayButton").style.display = "none";
 	document.getElementById("setupTable").style.display = "";
 	document.getElementById("playerZone").innerHTML = "";
@@ -52,15 +56,21 @@ function resetGame() {
 }
 
 function preview() {
+	console.log("preview/0")
+	
+	if(!canEditGrid) return
 	player = initializePlayer(true);
 	if (player) displayGrid(false);
 }
 
 function startGame() {
+	console.log("startGame/0")
+	console.log("/////////////////////////////////////////////////////////////////////////////////")
 	if (!(player = initializePlayer(false))) return;
 	if (!(computer = initializeComputer())) return;
 
-	playerTurn = true;
+	playerTurn = true; 
+	canEditGrid = false; 
 	document.getElementById("setupTable").style.display = "none";
 	document.getElementById("playerLives").innerHTML = playerLives;
 	document.getElementById("computerLives").innerHTML = computerLives;
@@ -70,6 +80,7 @@ function startGame() {
 
 
 function initializePlayer(preview) {
+	console.log("initializePlayer/0")
 	let x, y, j, p, varfx, varfy, nrAvion = 0, orientare;
 
 	let grid = [];
@@ -142,6 +153,7 @@ function initializePlayer(preview) {
 }
 
 function initializeComputer() {
+	console.log("initializeComputer/0")
 	let y, x, p, grid, orientare;
 	grid = [];
 	for (y = 0; y < gridX; ++y) {
@@ -199,6 +211,7 @@ function initializeComputer() {
 
 
 function setImage(y, x, id, isComputer) {
+	console.log("setImage/4")
 	if (isComputer) {
 		computer[y][x][0] = id;
 		document.images["pc" + y + "_" + x].src = "assets/av" + id + ".svg";
@@ -210,6 +223,7 @@ function setImage(y, x, id, isComputer) {
 }
 
 function displayGrid(isComputer) {
+	console.log("displayGrid/1")
 	let y, x, s;
 	s = '<div class="only-numbers-row">';
 	for (y = 0; y < gridY; y++) {
@@ -243,6 +257,7 @@ function displayGrid(isComputer) {
 }
 
 function playerGridClick(y, x) {
+	console.log("playerGridClick/2")
 	if (selectedAirplane) {
 		document.getElementById("pozx" + selectedAirplane).value = x + 1;
 		document.getElementById("pozy" + selectedAirplane).value = y + 1;
@@ -251,6 +266,7 @@ function playerGridClick(y, x) {
 }
 
 function gridClick(y, x) {
+	console.log("gridClick/2")
 	if (playerTurn) {
 		if ((computer[y][x][2] == "cap") && (computer[y][x][0] == "a")) {
 			let nrAvion = computer[y][x][1];
@@ -293,6 +309,7 @@ function gridClick(y, x) {
 }
 
 function computerGridClick() {
+	console.log("computerGridClick/0")
 	let x, y, selectedX, selectedY;
 	let selected = false;
 
@@ -344,6 +361,7 @@ function computerGridClick() {
 }
 
 function playerLostLive() {
+	console.log("playerLostLive/0")
 	if (--playerLives == 0) {
 		displayEnemyAirplanes();
 		alert("YOU LOST :(\n");
@@ -356,6 +374,7 @@ function playerLostLive() {
 }
 
 function shootDownAirplane(grid, nrAvion, isComputer) {
+	console.log("shootDownAirplane/3")
 	let y, x;
 	for (y = 0; y < gridX; ++y) {
 		for (x = 0; x < gridX; ++x) {
@@ -368,6 +387,7 @@ function shootDownAirplane(grid, nrAvion, isComputer) {
 
 
 function displayEnemyAirplanes() {
+	console.log("displayEnemyAirplanes/0")
 	console.log("DisplayAirplanes")
 	let y, x;
 	for (y = 0; y < gridX; ++y) {
