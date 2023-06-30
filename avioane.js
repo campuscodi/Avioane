@@ -57,10 +57,8 @@ function preview() {
 }
 
 function startGame() {
-	player = initializePlayer(false)
-	computer = initializeComputer()
-	if (player == []) return;
-	if (computer == []) return;
+	if (!(player = initializePlayer(false))) return;
+	if (!(computer = initializeComputer())) return;
 
 	playerTurn = true;
 	document.getElementById("setupTable").style.display = "none";
@@ -90,7 +88,7 @@ function initializePlayer(preview) {
 		if (varfx == "" || varfy == "") {
 			if (!preview) {
 				alert("Fill in the board with 5 planes!!!");
-				return [];
+				return false;
 			}
 			else
 				continue;
@@ -106,7 +104,7 @@ function initializePlayer(preview) {
 		if (varfx < 0 || varfx >= gridX || varfy < 0 || varfy >= gridY || grid[varfy][varfx][0] == "a") {
 			alert("Plane " + j + " was not set right!!!");
 			document.getElementById("pozx" + j).focus();
-			return [];
+			return false;
 		}
 
 		for (p = 0; p < 9; p++) {
@@ -116,13 +114,13 @@ function initializePlayer(preview) {
 			if (pozx >= gridX || pozx < 0 || pozy >= gridY || pozy < 0) {
 				alert("Plane " + j + " was not set right!!!");
 				document.getElementById("pozx" + j).focus();
-				return [];
+				return false;
 			}
 
 			if (grid[pozy][pozx][0] == "a") {
 				alert("Plane " + j + " overlaps another plane!!!");
 				document.getElementById("pozx" + j).focus();
-				return [];
+				return false;
 			}
 		}
 
